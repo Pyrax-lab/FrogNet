@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+{% comment %} <a class="navbar-brand" href="#">
+    <form method="POST" action = "{% url "logout" %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-outline-secondary">выйти</button>
+
+    </form>
+  </a> {% endcomment %}
+
+
+
+  <div class="profile-wrapper">
+    <div class="profile-banner">
+      <img src="/media/{{user.profile.baner}}" alt="Banner" class="banner-image">
+    </div>
+    
+    <div class="profile-info">
+      <img src="/media/{{user.profile.profile}}" alt="User Avatar" class="profile-avatar">
+      <div class="profile-details">
+        <h1 class="profile-name">{{user.username}}</h1>
+        <p class="profile-username">@j-{{user.username}}</p>
+        <p class="profile-bio">Добавить описание</p>
+      </div>
+      <button class="profile-button">Follow</button>
+    </div>  
+    
+    <div class="profile-content"> 
+      <div class="tabs">
+        <button class="tab active">Posts</button>
+        <button class="tab">About</button>
+        <button class="tab">Friends</button>
+      </div>
+      
+      <div class="posts">
+        <div class="post">
+          <p class="post-text">Just came back from an amazing trip to the mountains! 🏔️</p>
+          <img src="https://via.placeholder.com/400x200" alt="Post Image" class="post-image">
+          <div class="post-stats">
+            <span>❤️ 120</span>
+            <span>💬 35</span>
+          </div>
+        </div>
+        <div class="post">
+          <p class="post-text">Captured this beautiful sunset yesterday 🌅</p>
+          <img src="https://via.placeholder.com/400x200" alt="Post Image" class="post-image">
+          <div class="post-stats">
+            <span>❤️ 95</span>
+            <span>💬 22</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+{% endblock content %}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Frognet</h1>
+            
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Frognet</h2>
+            <p>Твоя новая социальная сеть где ты можешь встретить друзей</p>
+            {% if user.is_authenticated %}
+                <a href="{% url "profile" %}" class="cta-button">Создай свой красивый профиль</a>
+            {% else %}
+            <a href="{% url "login" %}" class="cta-button">Войти</a>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>Что такое Frognet?</h2>
+            <p>Frognet это новая социальнная сеть забравшие все самое лучшие у своих конкурентов. Тут ты можешь создавать посты общатся с друзьями создавать группы, создавать свой собственный товар и продвигать его прямо в ленте и еще много чего</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Почему выбирают Frognet?</h2>
+            <div class="features-list">
+                <div class="feature">
+                    <img src="media\tap-head-pepe-pepe-tap-head.png" alt="Connect">
+                    <h3>Общатся с друзьями</h3>
+                    <p>Общаётесь со своими собратьями.</p>
+                </div>
+                <div class="feature">
+                    <img src="/media/cozy-cozy-pepe.png" alt="Share">
+                    <h3>Делится моментаит</h3>
+                    <p>Покажите друзьям какой вы крутой лягушонок.</p>
+                </div>
+                <div class="feature">
+                    <img src="media/improved-pepe-pepe.png" alt="Positive Community">
+                    <h3>Самой доброе комьюнити</h3>
+                    <p>Поможет в любой ситуации и с любой проблемой.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <p>&copy; 2024-2025 Frognet | All Rights Reserved</p>
+            <div class="social-icons">
+                <a href="#">Instagram</a> | 
+                <a href="#">Twitter</a> | 
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+{% endblock content %}

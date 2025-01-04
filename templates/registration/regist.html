@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="content">
+    <div class="auth">
+      <h1 class="frogneth1">FrogNet</h1>
+    
+    <div class="auth_bkg">
+    
+      <img class = "frognetauth" src="/media/frog.png" alt="">
+
+
+      
+<form method="POST">
+    {% csrf_token %}
+    {% for f in form %}
+    <p>{{f.label}}</p>
+    <p class="login">{{f}}</p>
+    {% endfor %}
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Зарегестрироватся</button>
+    </div>
+
+
+
+</form>
+
+</div>
+</div>
+<p>FrogNet © 2024-2025</p>
+</div>
+
+{% endblock content %}

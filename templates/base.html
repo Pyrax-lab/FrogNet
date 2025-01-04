@@ -1,0 +1,91 @@
+
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <title>FrogNet</title>
+</head>
+<body>
+    
+    <nav class="navbar"> {% comment %} bg-body-tertiary {% endcomment %}
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url "frognet" %}">
+            <img src="/media/frog.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            FrogNet
+          </a>
+    
+          {% if user.is_authenticated %}
+          
+          <ul class="nav nav-underline">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url "add_post" %}">Добавить пост</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "post_list" %}">Лента</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            </li>
+            {% if user.is_superuser %}
+            <li class="nav-item">
+                <a class="nav-link"href="/admin">admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if request.path == '/' %}active{% endif %}"href="{% url "frognet" %}">О сайте</a>
+            </li>
+            
+
+            {% endif %}
+            <li class="nav-item"><form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+            </li>
+          </ul>
+
+          {% if request.path == "/user/profile/" %}
+          <ul class="nav nav-underline">
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url "post_list" %}">Редактировать профиль</a>
+          </li>
+        </ul>
+          {% endif %}
+
+          <a class="navbar-brand" href="#">
+            <a href="{% url "profile" %}"><img class="logouser" src="/media/{{user.profile.profile}}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            {% if user.is_authenticated %}{{user.username}}{% endif %}</a>
+          </a>
+       
+          
+
+          {% else %}
+            
+            <button type="submit" class="btn btn-outline-success" > <a class = "register" href="{% url "login" %}">войти</a></button>
+     
+          {% endif %}
+          
+    
+          
+    
+        </div>
+      </nav>
+
+    {% block content %}
+    
+    {% endblock content %}
+
+
+    
+</body>
+</html>

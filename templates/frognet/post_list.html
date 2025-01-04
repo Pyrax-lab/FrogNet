@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+    <div class="main_margin">
+        <div class="main_center">
+            {% for post in posts %}
+        
+
+            <h1>{{post.name}}</h1>
+            <p>{{post.description}}</p>
+            
+            <img class = "image_post" src="{{post.image.url}}" alt="">
+            
+            <p>{{post.author}}</p>
+
+            <button><a href="{% url "id_post" id=post.id %}">Читать статью</a></button>
+        {% endfor %}
+        </div>
+        
+    </div>
+
+{% endblock content %}
