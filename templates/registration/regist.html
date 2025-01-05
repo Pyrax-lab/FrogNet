@@ -2,33 +2,30 @@
 
 
 {% block content %}
-<div class="content">
-    <div class="auth">
-      <h1 class="frogneth1">FrogNet</h1>
-    
-    <div class="auth_bkg">
-    
-      <img class = "frognetauth" src="/media/frog.png" alt="">
 
 
+<div class="login_cont">
+  <div class="login-container">
+    <div class="login-box">
+      <h1 class="login-title">Зарегестрироватся</h1>
+      <img class="login-logo" src="/media/frog.png" alt="FrogNet Logo">
+  
+      <form method="POST" class="login-form">
+        {% csrf_token %}
+        {% for f in form %}
+          <div class="input-group">
+            <label for="{{ f.id_for_label }}">{{ f.label }}</label>
+            {{ f }}
+          </div>
+        {% endfor %}
+  
+        <button type="submit" class="btn-primary">Зарегестрироватся</button>
+      </form>
+  
       
-<form method="POST">
-    {% csrf_token %}
-    {% for f in form %}
-    <p>{{f.label}}</p>
-    <p class="login">{{f}}</p>
-    {% endfor %}
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary">Зарегестрироватся</button>
     </div>
-
-
-
-</form>
-
-</div>
-</div>
-<p>FrogNet © 2024-2025</p>
-</div>
+    <footer>FrogNet © 2024-2025</footer>
+  </div>
+  </div>
 
 {% endblock content %}
