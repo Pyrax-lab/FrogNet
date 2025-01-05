@@ -7,9 +7,9 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model): 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile = models.ImageField(default="default.jpg", upload_to="iamges", verbose_name="Профиль")
+    profile = models.ImageField(default="default.jpg", upload_to="iamges",blank = True, verbose_name="Профиль")
     bio = models.TextField(blank=True, null=True , verbose_name="Биография")
-    baner = models.ImageField(default = "5.jpg", upload_to="images", verbose_name="Банер профиля")
+    baner = models.ImageField(default = "5.jpg",blank = True, upload_to="images", verbose_name="Банер профиля")
 
 
     def __str__(self):

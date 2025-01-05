@@ -1,7 +1,7 @@
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth.views import LoginView
-from .forms import UserFormAuth, RegisterUserForm
+from .forms import UserFormAuth, RegisterUserForm, ProfileUser
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth import logout
 from django.views.generic import CreateView
@@ -33,7 +33,7 @@ def register(request):
             user = form.save(commit=False)
             user.set_password(form.cleaned_data["password1"])
             user.save()
-            
+
             Profile.objects.create(user = user)
             
             return render(request, "registration/regist_done.html", {"form":form })
@@ -43,6 +43,8 @@ def register(request):
 
 
     return render(request, "registration/regist.html", {"form": form})
+
+
 
 
 
@@ -56,3 +58,28 @@ def profile(request):
 
 
     return render(request, "registration/profile.html")
+
+
+
+def change_profile(request):
+
+    try:
+        profile = request.user.profile
+    except  Profile.DoesNotExist:
+        profile = None
+
+    form = ProfileUser(instance=profile)
+
+    if request.method == "POST":
+
+        form = ProfileUser(request.POST, request.FILES, instance=profile)
+        print("sss")
+        if form.is_valid():
+            # profile = form.save(commit = False)
+            # profile.user = request.user
+            # profile.save()
+            form.save()
+
+            return redirect("/user/profile/")
+
+    return render(request, "registration/change_profile.html", {"form" : form})

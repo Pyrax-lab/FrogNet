@@ -57,9 +57,17 @@
           <ul class="nav nav-underline">
 
           <li class="nav-item">
-            <a class="nav-link" href="{% url "post_list" %}">Редактировать профиль</a>
+            <a class="nav-link" href="{% url "change_profile" %}">Редактировать профиль</a>
+          </li>
+
+          <li class="nav-item">
+            <form method = "POST" action="{% url "logout" %}">
+            {% csrf_token %}
+            <button class="btn btn-outline-success" type="submit">Выйти из аккаунта</button>
+          </form>
           </li>
         </ul>
+
           {% endif %}
 
           <a class="navbar-brand" href="#">

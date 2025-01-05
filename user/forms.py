@@ -52,4 +52,4 @@ class ProfileUser(forms.ModelForm):
     
     class Meta:
         model = Profile
-        fields = ['profile', "bio"]
+        fields = ['baner','profile', "bio"]

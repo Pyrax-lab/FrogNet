@@ -1,0 +1,37 @@
+{% extends "registration/profile.html" %}
+
+{% block content %}
+
+
+<div class="profile-wrapper">
+    <div class="profile-banner">
+        
+      <img src="/media/{{ user.profile.baner }}" alt="Banner" class="banner-image">
+    </div>
+  
+    <div class="profile-info">
+      <img src="/media/{{ user.profile.profile }}" alt="User Avatar" class="profile-avatar">
+      <div class="profile-details">
+        
+        <h1 class="profile-name">{{ user.username }}</h1>
+        <p class="profile-username">@j-{{ user.username }}</p>
+        <p class="profile-bio">{{ user.profile.bio }}</p>
+      </div>
+    </div>
+  
+    <div class="edit-profile-form">
+      <h1>Изменение профиля</h1>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+
+      {{form}}
+
+      <button type="submit" class="submit-button">Изменить</button>
+
+        
+    </div>
+  </div>
+  
+
+{% endblock content %}
