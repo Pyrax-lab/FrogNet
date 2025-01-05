@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     # Библиотеки
     'django_bootstrap5',
+    'social_django',
 
 
     'frognet',
@@ -68,6 +69,8 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -115,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'UTC'
+IME_ZONE = 'Europe'
 
 USE_I18N = True
 
@@ -139,6 +142,6 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-#LOGIN_URL = "frognet"
+LOGIN_URL = "login"
 LOGOUT_REDIRECT_URL = "login"
 LOGIN_REDIRECT_URL = 'frognet'

@@ -6,6 +6,9 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth import logout
 from django.views.generic import CreateView
 from .models import Profile
+from django.contrib.auth import get_user_model
+from frognet.models import Post, Coment
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -53,14 +56,28 @@ def logout_user(reqeust):
     return HttpResponseRedirect(reverse("login"))
 
 
-def profile(request):
+def profile(request, id = None):
+
+    #print(id)
+    if id != None and id != request.user.id:
+        another_user = get_user_model().objects.filter(id = id)
+        another_user_profile = Profile.objects.filter(user_id = id)
+
+        post = Post.objects.filter(author_id = another_user[0].id)
+        coment_count = Coment.objects.filter(post_id = post[0].id).count()
+        
+        return render(request,"registration/another_user.html",{"another_user": another_user[0], "another_user_profile" : another_user_profile[0], "posts": post, "coment_count": coment_count})
+    
+    else:
+
+        posts = Post.objects.filter(author_id = request.user.id)
+        #print(posts[0].id)
+        coment_count = Coment.objects.filter(post_id = posts[0].id).count()
+        #print(coment_count)
+        return render(request, "registration/profile.html", {"posts": posts, "coment_count": coment_count})
 
 
-
-    return render(request, "registration/profile.html")
-
-
-
+@login_required
 def change_profile(request):
 
     try:

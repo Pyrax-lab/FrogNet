@@ -1,4 +1,5 @@
-{% block content %}
+{% extends "base.html" %}
+{% comment %} {% block content %}
 
 <div class="main_margin">
     <div class="main_center">
@@ -7,4 +8,212 @@
 
     </div>    
 </div>
+{% endblock content %} {% endcomment %}
+
+{% block content %}
+
+
+
+    <style>
+        /* Общие стили */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .post-image {
+            height: 1000px;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .post-meta span {
+            margin-right: 15px;
+        }
+
+        .post-content {
+            font-size: 1.1rem;
+            color: #444;
+            margin-bottom: 30px;
+        }
+
+        /* Комментарии */
+        .comments {
+            margin-top: 40px;
+        }
+
+        .comments h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .comment {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-radius: 8px;
+        }
+
+        .comment h3 {
+            font-size: 1rem;
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+
+        .comment p {
+            margin: 0;
+            color: #555;
+        }
+
+        .add-comment {
+            margin-top: 20px;
+        }
+
+        .add-comment textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .add-comment button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .add-comment button:hover {
+            background-color: #45a049;
+        }
+
+        /* Кнопка назад */
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Название поста -->
+        <h1>{{post.name}}</h1>
+        
+        <!-- Дата и автор -->
+        <div class="post-meta">
+            <div class="author">
+            {% if user.id == post.author.id %}
+                Автор: <a class="post-author" href="{% url 'profile' %}">{{ post.author }}</a>
+                {% else %}
+                Автор: <a class="post-author" href="{% url 'profile' post.author.id %}">{{ post.author }}</a>
+                {% endif %}
+            <span>Дата: {{post.time_created}}</span>
+        
+
+        <!-- Изображение -->
+        <img src="{{post.image.url}}" alt="Изображение поста" class="post-image">
+
+        <!-- Содержимое поста -->
+        <div class="post-content">
+            <p>{{post.description}}</p>
+            
+        </div>
+
+        <!-- Комментарии -->
+        <div class="comments">
+            <h2>Комментарии</h2>
+
+            <!-- Пример комментария -->
+
+            {% if coments.exists %}
+                {% for coment in coments %}
+                <div class="comment">
+                <p>{{coment.create}}</p>
+                {% if user.id == post.author.id %}
+                Автор: <a class="post-author" href="{% url 'profile' %}">{{ post.author }}</a>
+                {% else %}
+                Автор: <a class="post-author" href="{% url 'profile' post.author.id %}">{{ post.author }}</a>
+                {% endif %}
+                   <br>
+                   <br>
+                    <p>{{coment.text}}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>Коментариев пока нету</p>
+            {% endif %}
+
+            
+
+
+
+            
+
+            <!-- Форма для добавления комментария -->
+            {% if user.isauthenticated %}
+            <div class="add-comment">
+                <form action="" method="POST">
+
+                    {% csrf_token %}
+                    {{form}}
+                    <button type="submit">Отправить</button>
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <h3>Чтобы написать коментарий нужно войти</h3>
+        {% endif %}
+
+        <!-- Кнопка назад -->
+        <a href="{% url "post_list" %}" class="back-button">Назад</a>
+    </div>
+</body>
+</html>
+
+
 {% endblock content %}

@@ -14,15 +14,15 @@
 
   <div class="profile-wrapper">
     <div class="profile-banner">
-      <img src="/media/{{user.profile.baner}}" alt="Banner" class="banner-image">
+      <img src="/media/{{another_user_profile.baner}}" alt="Banner" class="banner-image">
     </div>
     
     <div class="profile-info">
-      <img src="/media/{{user.profile.profile}}" alt="User Avatar" class="profile-avatar">
+      <img src="/media/{{another_user_profile.profile}}" alt="User Avatar" class="profile-avatar">
       <div class="profile-details">
-        <h1 class="profile-name">{{user.username}}</h1>
-        <p class="profile-username">@j-{{user.username}}</p>
-        <p class="profile-bio">{{user.profile.bio}}</p>
+        <h1 class="profile-name">{{another_user.username}}</h1>
+        <p class="profile-username">@j-{{another_user.username}}</p>
+        <p class="profile-bio">{{another_user_profile.bio}}</p>
       </div>
       <button class="profile-button">Follow</button>
     </div>  
@@ -33,6 +33,7 @@
         <button class="tab">About</button>
         <button class="tab">Friends</button>
       </div>
+      
       
       <div class="posts">
 
@@ -46,11 +47,7 @@
           </div>
           {% endfor %}
       </div>
-      
 
-
-
-      
     </div>
   </div>
   
